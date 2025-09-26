@@ -2,41 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Tora App Design System - Space-themed Dark UI */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
+    /* Space-themed Dark Colors */
+    --background: 220 27% 8%;
+    --foreground: 220 14% 96%;
+    
+    --card: 220 27% 10%;
+    --card-foreground: 220 14% 96%;
+    
+    --popover: 220 27% 12%;
+    --popover-foreground: 220 14% 96%;
+    
+    /* Purple/Blue Space Accent System */
+    --primary: 261 83% 58%;
+    --primary-foreground: 220 14% 96%;
+    --primary-glow: 261 83% 68%;
+    
+    --secondary: 220 27% 15%;
+    --secondary-foreground: 220 14% 90%;
+    
+    --muted: 220 27% 12%;
+    --muted-foreground: 220 9% 65%;
+    
+    --accent: 237 83% 58%;
+    --accent-foreground: 220 14% 96%;
+    --accent-glow: 237 83% 68%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 220 14% 96%;
+    
+    --border: 220 27% 18%;
+    --input: 220 27% 15%;
+    --ring: 261 83% 58%;
+    
+    /* Enhanced Design Tokens */
+    --radius: 1rem;
+    
+    /* Space Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(220 27% 12%));
+    --gradient-cosmic: linear-gradient(180deg, hsl(220 27% 8%), hsl(240 27% 6%));
+    
+    /* Shadows & Glows */
+    --shadow-cosmic: 0 8px 32px -8px hsl(var(--primary) / 0.2);
+    --shadow-card: 0 4px 16px -2px hsl(220 27% 4% / 0.3);
+    --glow-primary: 0 0 20px hsl(var(--primary) / 0.4);
+    --glow-accent: 0 0 20px hsl(var(--accent) / 0.4);
+    
+    /* Animation Variables */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
     --sidebar-background: 0 0% 98%;
 
@@ -101,5 +119,70 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    background: var(--gradient-cosmic);
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  /* Space-themed Component Styles */
+  .cosmic-card {
+    @apply bg-card border border-border rounded-xl;
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-smooth);
+  }
+  
+  .cosmic-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-cosmic);
+  }
+  
+  .glow-effect {
+    box-shadow: var(--glow-primary);
+  }
+  
+  .accent-glow {
+    box-shadow: var(--glow-accent);
+  }
+  
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Animation Classes */
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 4px hsl(220 27% 4% / 0.5);
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: var(--glow-primary);
+  }
+  to {
+    box-shadow: 0 0 30px hsl(var(--primary) / 0.6), 0 0 40px hsl(var(--accent) / 0.4);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
   }
 }
